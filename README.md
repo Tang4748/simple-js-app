@@ -1,11 +1,13 @@
 README.md
 # simple-js-app/Pokedex
 My first js app which will be used as a pokedex.
+
 Key Features
 ● Load data from an external source (API)
 ● View a list of items
 ● On user action (e.g., by clicking on a list item), view details for that item
 <br>
+
 Requirements 
 ● The app must load data from an external API; for instance, the Pokémon API.
 ● The app must display a list of items loaded from that API after the page is loaded.
@@ -24,6 +26,11 @@ review how to do this in Intro to Frontend Development's Exercise 10: Code Quali
 Web Hosting).
 ● The app must work in Chrome, Firefox, Safari, Edge, and Internet Explorer 11.
 Optional functionalities 
+● The app should show loading indicators while loading data.
+● The app should handle errors (such as trying to load data while offline) and show user-friendly
+error messages.
+
+Optional Functionalities 
 ● The app should show loading indicators while loading data.
 ● The app should handle errors (such as trying to load data while offline) and show user-friendly
 error messages.
