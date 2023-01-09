@@ -55,9 +55,6 @@ let pokemonList= pokemonRepository.getAll();
 
 pokemonRepository.add({name: "Pikachu", height: 1.1 , type: "fire"});
 
-/*pokemonRepository.getAll().forEach(function(pokemon) {
- pokemonRepository.addListItem(pokemon);
-});*/
 
 /* tell 'for-loop' to look at length of variable array above first */
 //for (let i=0; i < pokemonList.length; i++)//{
