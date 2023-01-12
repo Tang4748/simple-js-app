@@ -36,11 +36,6 @@ let pokemonRepository = (function () {
   }
 
 
-
-  function getAll() {
-    return pokemonList;
-  }
-
   function addListItem (pokemon) {
   }
 
