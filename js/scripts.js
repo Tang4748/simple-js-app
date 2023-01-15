@@ -35,14 +35,30 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-
+//Add pokemon to the list with the button format
   function addListItem (pokemon) {
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class')
+    listItem.appendChild(button);
+    pokemonList.appendChild(listItem); 
+//added event listener: returns all pokemon info to console when button is clicked
+    button.addEventListener('click', function(event) {
+      showDetails(pokemon);
+    });
+  }
+
+  function showDetails(pokemon){
+    console.log(pokemon);
   }
 
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    showDetails: showDetails
   };
 })();
 
@@ -67,7 +83,7 @@ pokemonRepository.add({name: "Pikachu", height: 1.1 , type: "fire"});
   //}
 
 //replace for loop with forEach loop
-pokemonList.forEach (function(pokemon) {
+/*pokemonList.forEach (function(pokemon) {
     if (pokemon.height > 2) {
         document.write(pokemon.name + " (height: " + pokemon.height + "m) - Wow, that is a big pokemon!" + "<br>")
     } else if (pokemon.height >= 1 && pokemon.height < 2) {
@@ -76,4 +92,10 @@ pokemonList.forEach (function(pokemon) {
         document.write(pokemon.name + " (height: " + pokemon.height + "m) - That is a tiny pokemon!" + "<br>")
     }
       console.log(pokemon);
-    });
+    });*/
+
+
+
+pokemonList.forEach (function(pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
