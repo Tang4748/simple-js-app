@@ -23,7 +23,77 @@ body {
  -webkit-transition-duration: 0.4s; /* Safari */
  transition-duration: 0.4s;
  cursor: pointer;
- background-color: white;
  color: black;
  border: 2px solid #4caf50;
 }
+
+ul {
+ list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.spinner-border {
+    color: black;
+    margin: 50px;
+  }
+.error-message {
+    font-size: 16px;
+    padding-top: 100px;
+    text-align: center;
+  }
+.modal-content {
+    border: 4px solid;
+    border-color:black ;
+    border-radius: 5px;
+    color: black;
+    /* To match real Pokemon card dimensions */
+    height: 419px;
+    margin: 0 auto;
+    padding: 15px;
+    /* Disables browser pointer actions except pinch-zoom */
+    touch-action: pinch-zoom;
+    width: 300px;
+  }
+.modal-header {
+    border: none;
+  }
+.modal-title {
+    font-size: 24px;
+  }
+.modal-img {
+    margin-top: 20px;
+    width: 50%;
+  }
+.modal-text {
+    bottom: 0 auto;
+    padding: 16px 16px 16px 0;
+    position: absolute;
+    text-align: center;
+    overflow: auto; 
+  }
+  /* Removes border when clicking closing button */
+.close:focus {
+    outline: none;
+  }
+
+.pokemon-button:hover,
+.pokemon-button:focus {
+    background-color:black ;
+    cursor: pointer;
+    
+}
+
+.modal {
+    background: green;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    z-index: 999;
+    display: flex;
+  }
+
