@@ -3,16 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple JS App</title>
+    <title>Pokedex</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
   </head>
   <body>
-    <div class="main-content">
+    <main class="main-content">
       <h1>Pokedex</h1>
-
-        <ul class="pokemon-list"></ul>
-
-    </div>
+      <ul class="pokemon-list"></ul>
+      <div class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title"></h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                  <span aria-hidden="true">&times;</span><!--&times translates to x-->
+                  </button>
+              </div>
+            <div class="modal-body"></div>
+          </div>
+        </div>
+      </div>
+    </main>
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch-polyfill.js"></script>
     <script class="script" src="js/scripts.js"></script>
