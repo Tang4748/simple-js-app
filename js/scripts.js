@@ -41,8 +41,9 @@ let pokemonRepository = (function () {
 
    // Called in case of loading error and when manually hiding modal
    function hideModal() {
-    pokemonModal.classList.add('hidden');
+    pokemonModal.classList.add("hidden");
   }
+
 
 //Add pokemon to the list with the button format
   function addListItem (pokemon) {
@@ -52,12 +53,15 @@ let pokemonRepository = (function () {
     button.innerText = pokemon.name;
     button.classList.add("button-class")
     listItem.appendChild(button);
-    pokemonList.appendChild(listItem); 
+    pokemonList.appendChild(listItem);
+     
 //added event listener: returns all pokemon info to console when button is clicked
     button.addEventListener("click", function(event) {
       showDetails(pokemon);
     });
   }
+
+  
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
@@ -98,13 +102,16 @@ let pokemonRepository = (function () {
        modalText.appendChild(heightElement);
        modalText.appendChild(typesElement);
        modalText.appendChild(abilitiesElement);
-    });
+      });
+    
+
+  
   }
 
     // Hiding modal using Escape key.
   window.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
-      hideModal();
+      hideModal(); 
     }
   });
   
@@ -161,6 +168,8 @@ let pokemonRepository = (function () {
         console.error(e);
       });
   }
+
+
   return {
     showLoadingSpinner: showLoadingSpinner,
     hideLoadingSpinner: hideLoadingSpinner,
@@ -170,8 +179,9 @@ let pokemonRepository = (function () {
     showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails,
-    hideModal: hideModal 
+    hideModal: hideModal
   };
+  
 })();
 
 
