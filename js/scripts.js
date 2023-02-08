@@ -3,6 +3,7 @@ let pokemonRepository = (function () {
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
   let pokemonModal = document.querySelector(".modal-dialog");
 
+
   function showLoadingSpinner(spinnerLocation) {
     let spinnerContainer = document.createElement("div");
     spinnerContainer.classList.add("text-center");
@@ -24,6 +25,14 @@ let pokemonRepository = (function () {
     spinnerLocation.removeChild(spinnerLocation.lastChild);
   }
 
+  let searchButton = $(".btn-warning");
+  searchButton.on("click", function() {
+      let pokemonList = $("pokemon-list");
+      pokemonList.empty();
+      getByName($(".form-control").val()).forEach(function(pokemon) {
+          addListItem(pokemon);
+      });
+  })
 
   function add(pokemon) {
     if (
@@ -39,6 +48,14 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+     // This function returns a pokemon array with all pokemons
+    // that include the "search" term in their Name
+  function getByName(search) {
+    return pokemonList.filter(function(pokemon) {
+        return pokemon.name.toLowerCase().includes(search.toLowerCase());
+    });
+  }
+
    // Called in case of loading error and when manually hiding modal
    function hideModal() {
     pokemonModal.classList.add("hidden");
@@ -51,7 +68,7 @@ let pokemonRepository = (function () {
     let listItem = document.createElement("li");
     let button = document.createElement("button");
     button.innerText = pokemon.name;
-    button.classList.add("button-class")
+    button.classList.add("pokemon-button")
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
      
@@ -61,7 +78,7 @@ let pokemonRepository = (function () {
     });
   }
 
-  
+  // This function shows the modal with the pokemon details
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
@@ -108,13 +125,13 @@ let pokemonRepository = (function () {
   
   }
 
-    // Hiding modal using Escape key.
+    /* Hiding modal using Escape key.
   window.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
       hideModal(); 
     }
   });
-  
+  */
 
   function loadList() {
     return fetch(apiUrl).then(function (response) {
@@ -168,52 +185,56 @@ let pokemonRepository = (function () {
         console.error(e);
       });
   }
+   // This function shows a modal with the pokemon details
+   function showModal(pokemon) {
+    let modalTitile = $(".modal-title");
+    let modalBody = $(".modal-body");
+    
+    // Clearing previous modal content
+    modalTitile.empty();
+    modalBody.empty();
+
+    
+    let imageElementFront = $('<img class="modal-img" style="width:50%">');
+    imageElementFront.attr("src", pokemon.imageUrlFront);
+    let imageElementBack = $('<img class="modal-img" style="width:50%">');
+    imageElementBack.attr("src", pokemon.imageUrlBack);
+    let heightElement = $("<p>" + "height : " + pokemon.height + "</p>");
+    let weightElement = $("<p>" + "weight : " + pokemon.weight + "</p>");
+    let typesElement = $("<p>" + "types : " + pokemon.types + "</p>");
+    
+
+
+
+    modalTitile.append(pokemon.name);
+    modalBody.append(imageElementFront);
+    modalBody.append(imageElementBack);
+    modalBody.append(heightElement);
+    modalBody.append(weightElement);
+    modalBody.append(typesElement);
+}
+
+    
 
 
   return {
     showLoadingSpinner: showLoadingSpinner,
     hideLoadingSpinner: hideLoadingSpinner,
+    getByName: getByName,
     add: add,
     getAll: getAll,
     addListItem: addListItem,
     showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails,
-    hideModal: hideModal
+    hideModal: hideModal,
+    showModal: showModal
   };
   
 })();
 
 
 
-
-
-/* tell 'for-loop' to look at length of variable array above first */
-//for (let i=0; i < pokemonList.length; i++)//{
-  /* set condition for key-value of objects in array */
-    //if (pokemonList[i].height > 2){
-      //console.log(pokemonList[i].name + " (height: " + pokemonList[i].height + ") - Wow, that's big!");
-  /* inserted break line to put each object on a new line  */
-      //document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ") - Wow, that's big!" + "<br>");
-  /* only need to use 'else' not 'else-if' as we want the output to be on just one object  */
-  //} else {
-      //console.log(pokemonList[i].name + " (height: " + pokemonList[i].height + ")");
-  /* inserted break line tag to put each object on a new line  */
-     // document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ")" + "<br>")
-  //}
-  //}
-
-//replace for loop with forEach loop
-/*pokemonList.forEach (function(pokemon) {
-    if (pokemon.height > 2) {
-        document.write(pokemon.name + " (height: " + pokemon.height + "m) - Wow, that is a big pokemon!" + "<br>")
-    } else if (pokemon.height >= 1 && pokemon.height < 2) {
-        document.write(pokemon.name + " (height: " + pokemon.height + "m) - That is a medium sized pokemon!" + "<br>")
-    } else {
-        document.write(pokemon.name + " (height: " + pokemon.height + "m) - That is a tiny pokemon!" + "<br>")
-    }
-      console.log(pokemon);
-    });*/
 
 
 
