@@ -25,14 +25,7 @@ let pokemonRepository = (function () {
     spinnerLocation.removeChild(spinnerLocation.lastChild);
   }
 
-  let searchButton = $(".btn-warning");
-  searchButton.on("click", function() {
-      let pokemonList = $("pokemon-list");
-      pokemonList.empty();
-      getByName($(".form-control").val()).forEach(function(pokemon) {
-          addListItem(pokemon);
-      });
-  })
+
 
   function add(pokemon) {
     if (
@@ -67,6 +60,8 @@ let pokemonRepository = (function () {
     let pokemonList = document.querySelector(".pokemon-list");
     let listItem = document.createElement("li");
     let button = document.createElement("button");
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("data-target", "#pokemonModal");
     button.innerText = pokemon.name;
     button.classList.add("pokemon-button")
     listItem.appendChild(button);
@@ -77,6 +72,15 @@ let pokemonRepository = (function () {
       showDetails(pokemon);
     });
   }
+  
+  let searchButton = $(".btn-warning");
+  searchButton.on("click", function() {
+      let pokemonList = $("pokemon-list");
+      pokemonList.empty();
+      getByName($(".form-control").val()).forEach(function(pokemon) {
+          addListItem(pokemon);
+      });
+  })
 
   // This function shows the modal with the pokemon details
 
@@ -114,7 +118,7 @@ let pokemonRepository = (function () {
        abilitiesElement.innerText = "Abilities: " + pokemon.abilities;
       
        modalBody.appendChild(imageElementFront);
-       modalBody.appendChild(imageElementBack);
+       
        modalBody.appendChild(modalText);
        modalText.appendChild(heightElement);
        modalText.appendChild(typesElement);
@@ -168,15 +172,15 @@ let pokemonRepository = (function () {
         pokemon.height = details.height;
 
         let arrayOfTypes = [];
-        details.types.forEach(function (item) {
-          arrayOfTypes.push(item.type.name);
+        details.types.forEach(function (pokemon) {
+          arrayOfTypes.push(pokemon.type.name);
         });
         // Defining separator between printed array items
         pokemon.types = arrayOfTypes.join(', ');
 
         let arrayOfAbilities = [];
-        details.abilities.forEach(function (item) {
-          arrayOfAbilities.push(item.ability.name);
+        details.abilities.forEach(function (pokemon) {
+          arrayOfAbilities.push(pokemon.ability.name);
         });
         pokemon.abilities = arrayOfAbilities.join(', ');
       })
@@ -184,7 +188,8 @@ let pokemonRepository = (function () {
         hideLoadingSpinner(spinnerLocation);
         console.error(e);
       });
-  }
+    }
+  
    // This function shows a modal with the pokemon details
    function showModal(pokemon) {
     let modalTitile = $(".modal-title");
@@ -212,7 +217,11 @@ let pokemonRepository = (function () {
     modalBody.append(heightElement);
     modalBody.append(weightElement);
     modalBody.append(typesElement);
-}
+
+
+  }
+  
+
 
     
 
