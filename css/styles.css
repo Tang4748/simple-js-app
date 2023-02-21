@@ -50,6 +50,18 @@ body {
 
 .form-control {
     border: none;
+    list-style-type: disc;
+}
+.search-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 1600px;
 }
 
 main {
@@ -193,14 +205,9 @@ a, a:active, a:visited, a:focus {
     color: red;
 } 
 
-.btn-primary {
-    border: none;
-    background-color: rgba(24, 144, 174, 0.543);
-    border-radius: 5px;
-    margin: 10px;
-    width: 100px;
-    transition: 0.4s background-color; 
-    color: red;
-    align-self: center;
-
+.modal-footer .btn:hover {
+    background-color: red;
+    cursor: pointer;
+    animation: button-shake 0.4s;
+    color: black;
 }

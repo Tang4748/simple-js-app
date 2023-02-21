@@ -4,10 +4,11 @@ let pokemonRepository = (function () {
   let pokemonModal = document.querySelector(".modal-dialog");
 
 
+
   function showLoadingSpinner(spinnerLocation) {
     let spinnerContainer = document.createElement("div");
     spinnerContainer.classList.add("text-center");
-
+    
     let loadingSpinner = document.createElement("div");
     loadingSpinner.classList.add("spinner-border");
     loadingSpinner.setAttribute("role", "status");
@@ -41,18 +42,13 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-     // This function returns a pokemon array with all pokemons
-    // that include the "search" term in their Name
-  function getByName(search) {
-    return pokemonList.filter(function(pokemon) {
-        return pokemon.name.toLowerCase().includes(search.toLowerCase());
-    });
-  }
 
    // Called in case of loading error and when manually hiding modal
    function hideModal() {
     pokemonModal.classList.add("hidden");
   }
+
+
 
 
 //Add pokemon to the list with the button format
@@ -66,21 +62,32 @@ let pokemonRepository = (function () {
     button.classList.add("pokemon-button")
     listItem.appendChild(button);
     pokemonList.appendChild(listItem);
+
      
 //added event listener: returns all pokemon info to console when button is clicked
     button.addEventListener("click", function(event) {
       showDetails(pokemon);
     });
   }
+
   
-  let searchButton = $(".btn-warning");
-  searchButton.on("click", function() {
-      let pokemonList = $("pokemon-list");
-      pokemonList.empty();
-      getByName($(".form-control").val()).forEach(function(pokemon) {
-          addListItem(pokemon);
-      });
-  })
+  // This function searchs for a pokemon by name and adds it to the list
+  function findPokemon(findName) {
+    pokemonRepository.getAll().forEach((pokemon) => {
+      if (pokemon.name.indexOf(findName) > -1) {
+        pokemonRepository.addListItem(pokemon);
+      }
+    });
+  }
+
+
+  let searchForm = document.querySelector("#search-form");
+  //this event listener calls the findPokemon function when the user types in the search bar 
+  searchForm.addEventListener("keyup", () => {
+    document.querySelector(".list-group1").innerHTML = "";
+    findPokemon(searchForm.value.toLowerCase());
+  });
+
 
   // This function shows the modal with the pokemon details
 
@@ -118,7 +125,6 @@ let pokemonRepository = (function () {
        abilitiesElement.innerText = "Abilities: " + pokemon.abilities;
       
        modalBody.appendChild(imageElementFront);
-       
        modalBody.appendChild(modalText);
        modalText.appendChild(heightElement);
        modalText.appendChild(typesElement);
@@ -213,7 +219,6 @@ let pokemonRepository = (function () {
 
     modalTitile.append(pokemon.name);
     modalBody.append(imageElementFront);
-    modalBody.append(imageElementBack);
     modalBody.append(heightElement);
     modalBody.append(weightElement);
     modalBody.append(typesElement);
@@ -221,17 +226,14 @@ let pokemonRepository = (function () {
 
   }
   
-
-
-    
+  
 
 
   return {
-    showLoadingSpinner: showLoadingSpinner,
-    hideLoadingSpinner: hideLoadingSpinner,
-    getByName: getByName,
     add: add,
     getAll: getAll,
+    showLoadingSpinner: showLoadingSpinner,
+    hideLoadingSpinner: hideLoadingSpinner,
     addListItem: addListItem,
     showDetails: showDetails,
     loadList: loadList,
