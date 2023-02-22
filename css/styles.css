@@ -7,7 +7,7 @@ html {
 }
 
 .spinner-border {
-    color: black;
+    color: blue;
     margin: 50px;
 }
     
@@ -17,6 +17,12 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+}
+
+.btn {
+    align-items: right;
+    justify-content: right;
+    text-align: right;
 }
 
 .navbar {
