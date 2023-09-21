@@ -22,7 +22,7 @@ body {
 .btn {
     align-items: right;
     justify-content: right;
-    text-align: right;
+    text-align: center;
 }
 
 .navbar {
